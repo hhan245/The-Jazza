@@ -1,0 +1,171 @@
+use myshopdb;
+
+drop table if exists OrderDetails;
+drop table if exists Orders;
+drop table if exists Status;
+drop table if exists Products;
+drop table if exists Categories;
+
+use myshopdb;
+
+
+drop table if exists Products;
+drop table if exists Categories;
+create table Categories(
+                           CategoryID int AUTO_INCREMENT,
+                           CategoryName varchar(50),
+                           CONSTRAINT PK_Category PRIMARY KEY (CategoryID)
+);
+
+
+INSERT INTO Categories (CategoryName)
+values ('Truyền thống');
+INSERT INTO Categories (CategoryName)
+values ('Thập cẩm cao cấp');
+INSERT INTO Categories (CategoryName)
+values ('Công thức đặc biệt');
+INSERT INTO Categories (CategoryName)
+values ('Thức uống');
+
+create table Products(
+                         ProductID int AUTO_INCREMENT,
+                         ProductName varchar(50),
+                         CategoryID int,
+                         ImagePath varchar(100),
+                         Ingredient varchar(500),
+                         Price long,
+                         isActive bool,
+                         PRIMARY KEY (ProductID),
+                         FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+);
+
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Margherita Thịt Nguội & Burrata', 1, '', 'Xốt cà chua, phô mai Burrata, thịt nguội Ý Parma', 398000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza 3 Loại Phô Mai Nhà Làm', 1, '', 'Phô mai Mozzarella, Grano Padano, Camembert', 1900000,true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza 4 Loại Phô Mai Nhà Làm', 2, '', 'Phô mai Mozzarella, Grano Padano, Camembert, phô mai xanh', 240000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza 5 Loại Phô Mai Nhà Làm', 2, '', 'Phô mai Mozzarella, Grano Padano, Camembert, Raclette, phô mai xanh', 280000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Margherita', 2, '', 'Phô mai Mozzarella, Grano Padano, xốt cà chua. húng tây', 160000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Margherita Thịt Nguội', 2, '', 'Thịt nguội Ý Parma, rau rocket, xốt cà chua', 318000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Margherita & 2 Loại Xúc Xích Ý', 3, '','Xúc xích Ý Milano, xúc xích Ý Chorizo, xốt cà chua', 228000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Margherita Cà Tím Nướng', 3, '', 'Cà tím, xốt giấm Balsamic, xốt cà chua', 190000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Cá Hồi Xốt Kem Miso', 3, '', 'Cá hồi, xốt miso ngọt, xốt kem béo', 275000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Hải Sản Cay Với Phô Mai Hun Khói', 3, '','Tôm, mực, nghêu, phô mai hun khói, xốt cà chua', 263000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Tôm và Xốt Mayonnaise', 3, '', 'Tôm, bông cải xanh, xốt mayonnaise', 245000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Gà Xốt Teriyaki', 3, '', 'Gà, xốt nước tương ngọt, rong biển, lá tía tô, xốt mayonnaise', 210000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Camembert Và Xốt Nấm Thịt Nguội', 3, '', 'Xốt nấm, thịt nguội, phô mai Camembert nhà làm', 200000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza 4 Loại Nấm', 3, '', 'Nấm mỡ trắng, nấm mỡ nâu, nấm linh chi trắng và nấm linh chi nâu, tỏi', 190000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Xốt Bí Ngòi Quế Tây Và Hoa', 3, '', 'Bí ngòi, hoa, xốt húng tây và hạt', 170000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Gà Tandoori', 3, '', 'Thịt gà, phô mai nhà làm, rau rocket, gia vị cà ri Ấn Độ', 210000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Cải Xoăn Với Ricotta', 3, '', 'Rau cải xoăn, phô mai Ricotta, xốt ô liu, nụ bạch hoa', 180000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Sò Điệp Với Xốt Miso Ngọt', 3, '', 'Sò điệp Hokkaido Gratin, xốt miso ngọt, xốt Béchamel, súp lơ baby', 420000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Thịt Bò Cay Kiểu Kebab', 3, '', 'Thịt bò, xốt cay, xốt cà chua, ớt xanh, hạt thì là', 273000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Bò Kho', 3, '', 'Bò, bánh phở chiên, hành tây, rượu vang', 200000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Cải Rocket Hướng Dương', 3, '', 'Xà lách rocket, hạt hướng dương, táo, xốt Balsamic, ', 200000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Pizza Táo', 3, '', 'Táo, mật ong, hạt óc chó, xốt quả lựu', 195000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Nước ép dưa hấu', 4, '', 'Dưa hấu', 195000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Nước ép cam', 4, '', 'Cam', 195000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Nước ép dứa', 4, '', 'Dứa', 195000, true);
+
+INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)
+VALUES ('Nước chanh', 4, '', 'Chanh', 195000, true);
+
+create table Status(
+                       StatusID int AUTO_INCREMENT,
+                       StatusName varchar(50),
+                       CONSTRAINT PK_Category PRIMARY KEY (StatusID)
+);
+
+
+INSERT INTO Status (StatusName)
+values ('Đang xử lý');
+INSERT INTO Status (StatusName)
+values ('Đã hủy');
+INSERT INTO Status (StatusName)
+values ('Đã hoàn thành');
+
+
+drop table if exists Orders;
+create table Orders(
+                       OrderID int AUTO_INCREMENT,
+                       DateTime datetime,
+                       CustomerName varchar(100),
+                       PhoneNumber varchar(100),
+                       TotalPrice long,
+                       StatusID int,
+                       isActive bool,
+
+                       PRIMARY KEY (OrderID),
+                       FOREIGN KEY (StatusID) REFERENCES Status(StatusID)
+);
+
+drop table if exists OrderDetails;
+create table OrderDetails(
+                             OrderID int,
+                             ProductID int,
+                             Quantity int,
+                             PRIMARY KEY (OrderID, ProductID),
+                             FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
+                             FOREIGN KEY (OrderID) REFERENCES Orders(OrderID) ON DELETE CASCADE
+
+
+);
+
+ALTER TABLE Orders
+    ADD COLUMN Points int DEFAULT 0;
+
+drop table if exists Customers;
+CREATE TABLE Customers (
+                           CustomerID INT AUTO_INCREMENT,
+                           PhoneNumber VARCHAR(100),
+                           TotalPoints INT DEFAULT 0,
+                           PRIMARY KEY (CustomerID)
+);

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="line" prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #f4f2ef;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myshop.controllers.DashBoardController">
+   <children>
+      <Label layoutX="39.0" layoutY="9.0" text="Trang chủ" textFill="#222f52">
+         <font>
+            <Font name="Alegreya Medium" size="25.0" />
+         </font></Label>
+      <HBox fx:id="line_shape1" layoutX="38.0" layoutY="51.0" prefHeight="91.0" prefWidth="242.0" stylesheets="@../css/dashboard.css" />
+      <AnchorPane layoutX="38.0" layoutY="52.0" prefHeight="90.0" prefWidth="239.0">
+         <children>
+            <Label layoutX="20.0" layoutY="65.0" text="Bánh Pizza đã bán" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="sold" layoutX="20.0" layoutY="36.0" text="0" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="20.0" />
+               </font>
+            </Label>
+            <Circle fill="#cccccc" layoutX="28.0" layoutY="22.0" radius="13.0" stroke="#cccccc" strokeType="INSIDE" />
+            <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="18.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/pizza1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="57.0" fitWidth="106.0" layoutX="104.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/rising.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <HBox fx:id="line_shape2" layoutX="379.0" layoutY="53.0" prefHeight="91.0" prefWidth="242.0" stylesheets="@../css/dashboard.css" />
+      <AnchorPane layoutX="377.0" layoutY="54.0" prefHeight="90.0" prefWidth="246.0">
+         <children>
+            <Label layoutX="14.0" layoutY="65.0" text="Đơn hàng đã hoàn thành" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="completed" layoutX="14.0" layoutY="36.0" text="0" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="20.0" />
+               </font>
+            </Label>
+            <Circle fill="#cccccc" layoutX="25.0" layoutY="22.0" radius="13.0" stroke="#cccccc" strokeType="INSIDE" />
+            <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/pizzabox.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="57.0" fitWidth="106.0" layoutX="98.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/rising.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <HBox fx:id="line_shape3" layoutX="721.0" layoutY="53.0" prefHeight="91.0" prefWidth="242.0" stylesheets="@../css/dashboard.css" />
+      <AnchorPane layoutX="721.0" layoutY="54.0" prefHeight="90.0" prefWidth="242.0">
+         <children>
+            <Label layoutX="17.0" layoutY="65.0" text="Doanh thu đã thu về " textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="revenue" layoutX="17.0" layoutY="36.0" text="0" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Regular" size="20.0" />
+               </font>
+            </Label>
+            <Circle fill="#cccccc" layoutX="24.0" layoutY="20.0" radius="13.0" stroke="#cccccc" strokeType="INSIDE" />
+            <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/revenue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="57.0" fitWidth="106.0" layoutX="111.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/rising.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <HBox fx:id="line_shape4" layoutX="38.0" layoutY="153.0" prefHeight="223.0" prefWidth="496.0" stylesheets="@../css/dashboard.css">
+         <children>
+            <AnchorPane prefHeight="198.0" prefWidth="491.0">
+               <children>
+                  <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="#ddd6c5" height="171.0" layoutX="23.0" layoutY="38.0" stroke="#ddd6c5" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="126.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd6c5" height="171.0" layoutX="184.0" layoutY="38.0" stroke="#ddd6c5" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="126.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd6c5" height="171.0" layoutX="345.0" layoutY="38.0" stroke="#ddd6c5" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="126.0" />
+                  <Label fx:id="quantity3" layoutX="357.0" layoutY="186.0" prefHeight="18.0" prefWidth="103.0" text="Bánh Pizza đã bán" textAlignment="CENTER" textFill="#222f52">
+                     <font>
+                        <Font name="BT Beau Sans Light" size="10.0" />
+                     </font></Label>
+                  <Label fx:id="quantity2" layoutX="195.0" layoutY="186.0" prefHeight="18.0" prefWidth="103.0" text="Bánh Pizza đã bán" textAlignment="CENTER" textFill="#222f52">
+                     <font>
+                        <Font name="BT Beau Sans Light" size="10.0" />
+                     </font></Label>
+                  <Label fx:id="quantity1" layoutX="37.0" layoutY="186.0" prefHeight="18.0" prefWidth="103.0" text="Bánh Pizza đã bán&#10;" textAlignment="CENTER" textFill="#222f52">
+                     <font>
+                        <Font name="BT Beau Sans Light" size="10.0" />
+                     </font></Label>
+                  <ImageView fx:id="image1" fitHeight="102.0" fitWidth="113.0" layoutX="35.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image2" fitHeight="102.0" fitWidth="113.0" layoutX="197.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="image3" fitHeight="102.0" fitWidth="113.0" layoutX="357.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="pizza1" fill="#222f52" layoutX="37.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên bánh" textAlignment="CENTER" wrappingWidth="98.0">
+                     <font>
+                        <Font name="BT Beau Sans Regular" size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pizza2" fill="#222f52" layoutX="197.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên bánh" textAlignment="CENTER" wrappingWidth="98.0">
+                     <font>
+                        <Font name="BT Beau Sans Regular" size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="pizza3" fill="#222f52" layoutX="358.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên bánh" textAlignment="CENTER" wrappingWidth="98.0">
+                     <font>
+                        <Font name="BT Beau Sans Regular" size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#222f52" layoutX="16.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pizza Bán Chạy Nhất">
+                     <font>
+                        <Font name="BT Beau Sans Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="23.0" fitWidth="55.0" layoutX="15.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/flag.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="55.0" layoutX="176.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/flag2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="55.0" layoutX="336.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/flag3.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children></HBox>
+      <HBox fx:id="line_shape5" layoutX="39.0" layoutY="386.0" prefHeight="342.0" prefWidth="924.0" stylesheets="@../css/dashboard.css">
+         <children>
+            <AnchorPane prefHeight="333.0" prefWidth="919.0">
+               <children>
+                  <TableView fx:id="dashboard" layoutX="15.0" layoutY="39.0" prefHeight="284.0" prefWidth="890.0" stylesheets="@../css/dashboard-tableview.css">
+                     <columns>
+                        <TableColumn fx:id="idCol" prefWidth="163.99999618530273" text="Mã đơn hàng" />
+                        <TableColumn fx:id="dateTimeCol" minWidth="0.0" prefWidth="252.00003051757812" text="Thời gian" />
+                        <TableColumn fx:id="totalPriceCol" minWidth="0.0" prefWidth="231.20001220703125" text="Thành tiền " />
+                        <TableColumn fx:id="statusCol" prefWidth="239.19998779296873" text="Trạng thái " />
+                     </columns>
+                  </TableView>
+                  <Text fill="#222f52" layoutX="16.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Đơn hàng gần đây">
+                     <font>
+                        <Font name="BT Beau Sans Bold" size="15.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox fx:id="line_shape6" layoutX="605.0" layoutY="153.0" prefHeight="223.0" prefWidth="358.0">
+         <children>
+            <AnchorPane prefHeight="204.0" prefWidth="358.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd6c5" height="171.0" layoutX="23.0" layoutY="38.0" stroke="#ddd6c5" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="126.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ddd6c5" height="171.0" layoutX="207.0" layoutY="38.0" stroke="#ddd6c5" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="126.0" />
+                  <Label fx:id="quantity4" layoutX="51.0" layoutY="186.0" prefHeight="18.0" prefWidth="103.0" text="Nước đã bán" textAlignment="CENTER" textFill="#222f52">
+                     <font>
+                        <Font name="BT Beau Sans Light" size="10.0" />
+                     </font></Label>
+                  <ImageView fx:id="image4" fitHeight="102.0" fitWidth="113.0" layoutX="35.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="drink1" fill="#222f52" layoutX="38.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên nước" textAlignment="CENTER" wrappingWidth="98.0">
+                     <font>
+                        <Font name="BT Beau Sans Regular" size="11.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="quantity5" layoutX="235.0" layoutY="187.0" prefHeight="18.0" prefWidth="103.0" text="Nước đã bán" textAlignment="CENTER" textFill="#222f52">
+                     <font>
+                        <Font name="BT Beau Sans Light" size="10.0" />
+                     </font></Label>
+                  <ImageView fx:id="image5" fitHeight="102.0" fitWidth="113.0" layoutX="220.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text fx:id="drink2" fill="#222f52" layoutX="221.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên nước" textAlignment="CENTER" wrappingWidth="98.0">
+                     <font>
+                        <Font name="BT Beau Sans Regular" size="11.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#222f52" layoutX="20.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thức Uống Bán Chạy Nhất">
+                     <font>
+                        <Font name="BT Beau Sans Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="23.0" fitWidth="55.0" layoutX="16.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/flag.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="23.0" fitWidth="55.0" layoutX="199.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imgs/flag2.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

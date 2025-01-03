@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #F4F2EF;" xmlns="http://javafx.com/javafx/16.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myshop.controllers.LoginWindowController">
+   <children>
+      <Label alignment="CENTER" layoutX="652.0" layoutY="162.0" style="-fx-font-weight: bold;" text="Đăng nhập" textFill="#222f52">
+         <font>
+            <Font name="Alegreya Medium" size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="594.0" layoutY="276.0" text="Tên đăng nhập" textFill="#222f52">
+         <font>
+            <Font name="Alegreya Regular" size="16.0" />
+         </font></Label>
+      <Label layoutX="594.0" layoutY="324.0" text="Mật khẩu" textFill="#222f52">
+         <font>
+            <Font name="Alegreya Regular" size="16.0" />
+         </font></Label>
+      <TextField fx:id="usernameInput" layoutX="721.0" layoutY="276.0" prefHeight="26.0" prefWidth="184.0" />
+      <Button fx:id="loginBtn" alignment="CENTER" layoutX="695.0" layoutY="404.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="110.0" stylesheets="@../css/login.css" text="Đăng nhập">
+         <font>
+            <Font name="Alegreya Medium" size="15.0" />
+         </font></Button>
+      <PasswordField fx:id="passwordInput" layoutX="722.0" layoutY="323.0" prefHeight="26.0" prefWidth="184.0" />
+      <Label fx:id="errorText" alignment="CENTER" layoutX="669.0" layoutY="367.0" text="Sai tên đăng nhập hoặc mật khẩu" textFill="RED">
+         <font>
+            <Font name="Alegreya Regular" size="12.0" />
+         </font></Label>
+      <AnchorPane layoutX="-10.0" layoutY="-7.0" prefHeight="710.0" prefWidth="500.0" style="-fx-background-color: #222F52;" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="510.0" AnchorPane.topAnchor="-7.0">
+         <children>
+            <ImageView fitHeight="404.0" fitWidth="469.0" layoutX="-53.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-87.0" AnchorPane.leftAnchor="-53.0">
+               <image>
+                  <Image url="@../imgs/banh pizza kaka.png" />
+               </image>
+            </ImageView>
+            <Text fill="#ddd6c5" layoutX="90.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivering Wow, Sharing Happiness" wrappingWidth="325.9163818359375">
+               <font>
+                  <Font name="Alegreya Regular" size="41.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="24.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imgs/logo kem.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Text fill="#222f52" layoutX="683.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Dành cho nhân viên">
+         <font>
+            <Font name="Alegreya Medium Italic" size="17.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

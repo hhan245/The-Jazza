@@ -1,0 +1,52 @@
+
+.side-bar-btn{
+    -fx-background-color: #f4f2ef;
+    -fx-text-fill: #222f52;
+
+}
+
+
+
+.label-side-bar{
+    -fx-text-fill: #222f52;
+    -fx-font-family: "Alegreya";
+    -fx-font-size: 18px;
+
+
+}
+.icon-side-bar{
+    -fx-fill: #ddd6c5;
+
+}
+.side-bar-btn:hover{
+    -fx-background-color: rgb(221, 214, 197);
+}
+.side-bar-btn:hover .label-side-bar{
+    -fx-background-color: #ddd6c5;
+    -fx-text-fill: #222f52;
+    -fx-font-weight: bold;
+}
+.side-bar-btn:hover .icon-side-bar{
+    -fx-fill: #222f52;
+    -fx-font-weight: bold;
+}
+.side-bar-btn:selected .label-side-bar{
+    -fx-background-color: #f4f2ef;
+    -fx-text-fill: #222f52;
+
+;
+
+
+}
+.side-bar-btn:selected .icon-side-bar{
+    -fx-fill: #222f52;
+
+}
+.side-bar-btn:selected{
+    -fx-background-color: rgb(244, 242, 239);
+    -fx-text-fill: #f4f2ef;
+    -fx-font-weight: bold;
+
+
+}
+

@@ -1,0 +1,200 @@
+<html>
+<head>
+<title>MainWindowController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainWindowController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">Main</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">Storing</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">Initializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Node</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">HBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">Font</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">URL</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">ResultSet</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">MessageFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Optional</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ResourceBundle</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">MainWindowController </span><span class="s0">implements </span><span class="s1">Initializable </span><span class="s2">{</span>
+    <span class="s1">@FXML</span>
+    <span class="s1">HBox hBox</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton dashBoardBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton productsBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton ordersBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton statsBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button logoutBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton eventBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label dashboardLabel</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ToggleButton customerBtn</span><span class="s2">;</span>
+
+
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">initialize</span><span class="s2">(</span><span class="s1">URL location</span><span class="s2">, </span><span class="s1">ResourceBundle resources</span><span class="s2">) {</span>
+
+        <span class="s1">logoutBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+            <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;windows/login-window.fxml&quot;</span><span class="s2">));</span>
+            <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">CONFIRMATION</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Error Message&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s3">&quot;null&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s3">&quot;Are you sure you want to log out?&quot;</span><span class="s2">);</span>
+                <span class="s1">Optional</span><span class="s2">&lt;</span><span class="s1">ButtonType</span><span class="s2">&gt; </span><span class="s1">option </span><span class="s2">= </span><span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">get</span><span class="s2">() == </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">OK</span><span class="s2">) {</span>
+                <span class="s1">scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s4">1000</span><span class="s2">, </span><span class="s4">700</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Login!&quot;</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+                    <span class="s2">((</span><span class="s1">Node</span><span class="s2">)(</span><span class="s1">event</span><span class="s2">.</span><span class="s1">getSource</span><span class="s2">())).</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">().</span><span class="s1">hide</span><span class="s2">();</span>
+                    <span class="s5">//xoa username + password</span>
+                    <span class="s1">Storing</span><span class="s2">.</span><span class="s1">putValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;username&quot;</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+                    <span class="s1">Storing</span><span class="s2">.</span><span class="s1">putValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;password&quot;</span><span class="s2">, </span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+
+                <span class="s2">}</span>
+                <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">get</span><span class="s2">() == </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">CANCEL</span><span class="s2">) {</span>
+                    <span class="s1">alert</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">IOException e</span><span class="s2">) {</span>
+                <span class="s0">throw new </span><span class="s1">RuntimeException</span><span class="s2">(</span><span class="s1">e</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s2">});</span>
+        <span class="s1">dashBoardBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">productsBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">2</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">ordersBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">3</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">statsBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">4</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">eventBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">5</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">customerBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">6</span><span class="s2">);</span>
+        <span class="s2">});</span>
+
+
+
+        <span class="s1">ChangeTab</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">void </span><span class="s1">ChangeTab</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idTab</span><span class="s2">){</span>
+        <span class="s5">//idTab</span>
+        <span class="s5">//1: dashboard,2: products, 3: orders, 4:stats</span>
+
+        <span class="s5">//Remove thang thu 2 di</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">size</span><span class="s2">() &gt;= </span><span class="s4">2</span><span class="s2">){</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">remove</span><span class="s2">(</span><span class="s4">1</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s1">ChangeSelectedMenu</span><span class="s2">(</span><span class="s1">idTab</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">1</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/dashboard-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">2</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/products-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">3</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/orders-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">4</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/stats-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">5</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/event-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">6</span><span class="s2">){</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">loadTab</span><span class="s2">(</span><span class="s3">&quot;tabs/customer-tab.fxml&quot;</span><span class="s2">);</span>
+            <span class="s1">hBox</span><span class="s2">.</span><span class="s1">getChildren</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">node</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+    <span class="s1">Node loadTab</span><span class="s2">(</span><span class="s1">String fxmlPath</span><span class="s2">){</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s1">fxmlPath</span><span class="s2">));</span>
+            <span class="s1">Node node </span><span class="s2">= </span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;load thanh cong&quot;</span><span class="s2">);</span>
+            <span class="s0">return </span><span class="s1">node</span><span class="s2">;</span>
+        <span class="s2">}</span>
+        <span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">void </span><span class="s1">ChangeSelectedMenu</span><span class="s2">(</span><span class="s0">int </span><span class="s1">idTab</span><span class="s2">){</span>
+        <span class="s1">dashBoardBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">productsBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">ordersBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">statsBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">eventBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s1">customerBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">1</span><span class="s2">){</span>
+            <span class="s1">dashBoardBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">2</span><span class="s2">){</span>
+            <span class="s1">productsBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">3</span><span class="s2">){</span>
+            <span class="s1">ordersBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">4</span><span class="s2">){</span>
+            <span class="s1">statsBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">5</span><span class="s2">){</span>
+            <span class="s1">eventBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">else if  </span><span class="s2">(</span><span class="s1">idTab </span><span class="s2">== </span><span class="s4">6</span><span class="s2">){</span>
+            <span class="s1">customerBtn</span><span class="s2">.</span><span class="s1">setSelected</span><span class="s2">(</span><span class="s0">true</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<html>
+<head>
+<title>ProductsTabController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+.s5 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ProductsTabController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">Main</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Category</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">beans</span><span class="s2">.</span><span class="s1">property</span><span class="s2">.</span><span class="s1">SimpleIntegerProperty</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">FXCollections</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">ObservableArray</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">ObservableList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">transformation</span><span class="s2">.</span><span class="s1">FilteredList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">transformation</span><span class="s2">.</span><span class="s1">SortedList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">Initializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">geometry</span><span class="s2">.</span><span class="s1">Pos</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">PopupWindow</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">URL</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">ResultSet</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">MessageFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">NumberFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Locale</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ResourceBundle</span><span class="s2">;</span>
+
+
+
+<span class="s0">public class </span><span class="s1">ProductsTabController </span><span class="s0">implements </span><span class="s1">Initializable </span><span class="s2">{</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button addBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">categoryCol</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">idCol</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Image</span><span class="s2">&gt; </span><span class="s1">imageCol</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">nameCol</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">priceCol</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">ingredientCol</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableColumn</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Button</span><span class="s2">&gt; </span><span class="s1">actionCol</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TableView</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">&gt; </span><span class="s1">tableView</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button nextBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button prevBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label totalPageLabel</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label currentPageLabel</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField searchField</span><span class="s2">;</span>
+
+    <span class="s0">private int </span><span class="s1">currentPage </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">totalPage </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+    <span class="s0">private int </span><span class="s1">pageSize </span><span class="s2">= </span><span class="s3">7</span><span class="s2">;</span>
+
+    <span class="s4">//du lieu luu trong db</span>
+    <span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">&gt; </span><span class="s1">products </span><span class="s2">= </span><span class="s1">FXCollections</span><span class="s2">.</span><span class="s1">observableArrayList</span><span class="s2">();</span>
+    <span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">Category</span><span class="s2">&gt; </span><span class="s1">categories </span><span class="s2">= </span><span class="s1">FXCollections</span><span class="s2">.</span><span class="s1">observableArrayList</span><span class="s2">();</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">initialize</span><span class="s2">(</span><span class="s1">URL location</span><span class="s2">, </span><span class="s1">ResourceBundle resources</span><span class="s2">) {</span>
+        <span class="s0">int </span><span class="s1">totalItems </span><span class="s2">= </span><span class="s1">countAllProducts</span><span class="s2">();</span>
+        <span class="s1">totalPage </span><span class="s2">= (</span><span class="s0">int</span><span class="s2">)</span><span class="s1">Math</span><span class="s2">.</span><span class="s1">ceil</span><span class="s2">(</span><span class="s3">1.0 </span><span class="s2">* </span><span class="s1">totalItems</span><span class="s2">/</span><span class="s1">pageSize</span><span class="s2">);</span>
+        <span class="s1">currentPage </span><span class="s2">= </span><span class="s3">1</span><span class="s2">;</span>
+
+        <span class="s1">currentPageLabel</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bind</span><span class="s2">(</span><span class="s0">new </span><span class="s1">SimpleIntegerProperty</span><span class="s2">(</span><span class="s1">currentPage</span><span class="s2">).</span><span class="s1">asString</span><span class="s2">());</span>
+        <span class="s1">totalPageLabel</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bind</span><span class="s2">(</span><span class="s0">new </span><span class="s1">SimpleIntegerProperty</span><span class="s2">(</span><span class="s1">totalPage</span><span class="s2">).</span><span class="s1">asString</span><span class="s2">());</span>
+        <span class="s1">prevBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">&gt; </span><span class="s3">1</span><span class="s2">){</span>
+                <span class="s1">currentPage</span><span class="s2">--;</span>
+                <span class="s1">currentPageLabel</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bind</span><span class="s2">(</span><span class="s0">new </span><span class="s1">SimpleIntegerProperty</span><span class="s2">(</span><span class="s1">currentPage</span><span class="s2">).</span><span class="s1">asString</span><span class="s2">());</span>
+                <span class="s1">loadProducts</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">nextBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">&lt; </span><span class="s1">totalPage</span><span class="s2">){</span>
+                <span class="s1">currentPage</span><span class="s2">++;</span>
+                <span class="s1">currentPageLabel</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bind</span><span class="s2">(</span><span class="s0">new </span><span class="s1">SimpleIntegerProperty</span><span class="s2">(</span><span class="s1">currentPage</span><span class="s2">).</span><span class="s1">asString</span><span class="s2">());</span>
+                <span class="s1">loadProducts</span><span class="s2">();</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+
+        <span class="s1">tableView</span><span class="s2">.</span><span class="s1">setItems</span><span class="s2">(</span><span class="s1">products</span><span class="s2">);</span>
+        <span class="s1">searchField</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">addListener</span><span class="s2">((</span><span class="s1">observable</span><span class="s2">, </span><span class="s1">oldValue</span><span class="s2">, </span><span class="s1">newValue</span><span class="s2">) </span><span class="s1">-&gt; </span><span class="s2">{</span>
+            <span class="s1">filterProducts</span><span class="s2">(</span><span class="s1">newValue</span><span class="s2">);</span>
+        <span class="s2">});</span>
+        <span class="s1">idCol</span><span class="s2">.</span><span class="s1">setCellValueFactory</span><span class="s2">(</span><span class="s1">param -&gt; param</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">().</span><span class="s1">ProductIDProperty</span><span class="s2">().</span><span class="s1">asString</span><span class="s2">());</span>
+        <span class="s1">nameCol</span><span class="s2">.</span><span class="s1">setCellValueFactory</span><span class="s2">(</span><span class="s1">param -&gt; param</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">().</span><span class="s1">NameProperty</span><span class="s2">());</span>
+        <span class="s1">ingredientCol</span><span class="s2">.</span><span class="s1">setCellValueFactory</span><span class="s2">(</span><span class="s1">param -&gt; param</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">().</span><span class="s1">IngredientProperty</span><span class="s2">());</span>
+        <span class="s1">priceCol</span><span class="s2">.</span><span class="s1">setCellFactory</span><span class="s2">(</span><span class="s1">param -&gt; </span><span class="s2">{</span>
+            <span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">cell </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">String</span><span class="s2">&gt;(){</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">String item</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">empty</span><span class="s2">) {</span>
+                    <span class="s0">super</span><span class="s2">.</span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s1">empty</span><span class="s2">);</span>
+                    <span class="s0">if </span><span class="s2">(!</span><span class="s1">empty</span><span class="s2">){</span>
+                        <span class="s0">int </span><span class="s1">rowID </span><span class="s2">= </span><span class="s1">getIndex</span><span class="s2">();</span>
+                        <span class="s1">Product product </span><span class="s2">= </span><span class="s1">products</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rowID</span><span class="s2">);</span>
+
+                        <span class="s1">Locale locale </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Locale</span><span class="s2">(</span><span class="s5">&quot;vn&quot;</span><span class="s2">, </span><span class="s5">&quot;VN&quot;</span><span class="s2">);</span>
+                        <span class="s1">NumberFormat currencyFormatter </span><span class="s2">= </span><span class="s1">NumberFormat</span><span class="s2">.</span><span class="s1">getCurrencyInstance</span><span class="s2">(</span><span class="s1">locale</span><span class="s2">);</span>
+                        <span class="s1">setText</span><span class="s2">(</span><span class="s1">currencyFormatter</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">()));</span>
+                    <span class="s2">}</span>
+                    <span class="s0">else </span><span class="s2">{</span>
+                        <span class="s1">setText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+                    <span class="s2">}</span>
+
+                <span class="s2">}</span>
+            <span class="s2">};</span>
+            <span class="s0">return </span><span class="s1">cell</span><span class="s2">;</span>
+        <span class="s2">});</span>
+        <span class="s4">//quantityCol.setCellValueFactory(param -&gt; param.getValue().QuantityProperty().asString());</span>
+
+        <span class="s1">categoryCol</span><span class="s2">.</span><span class="s1">setCellValueFactory</span><span class="s2">(</span><span class="s1">param -&gt; param</span><span class="s2">.</span><span class="s1">getValue</span><span class="s2">().</span><span class="s1">getCategory</span><span class="s2">().</span><span class="s1">CategoryNameProperty</span><span class="s2">());</span>
+
+        <span class="s4">//hinh anh</span>
+
+        <span class="s1">imageCol</span><span class="s2">.</span><span class="s1">setCellFactory</span><span class="s2">(</span><span class="s1">param -&gt; </span><span class="s2">{</span>
+            <span class="s0">final </span><span class="s1">ImageView imageView </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ImageView</span><span class="s2">();</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setFitHeight</span><span class="s2">(</span><span class="s3">50</span><span class="s2">);</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setFitWidth</span><span class="s2">(</span><span class="s3">50</span><span class="s2">);</span>
+            <span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Image</span><span class="s2">&gt; </span><span class="s1">cell </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Image</span><span class="s2">&gt;(){</span>
+                <span class="s1">@Override</span>
+                <span class="s0">public void </span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">Image item</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">empty</span><span class="s2">) {</span>
+                    <span class="s0">super</span><span class="s2">.</span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s1">empty</span><span class="s2">);</span>
+                    <span class="s0">if </span><span class="s2">(!</span><span class="s1">empty</span><span class="s2">){</span>
+                        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">getTableView</span><span class="s2">().</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getIndex</span><span class="s2">()).</span><span class="s1">getProductName</span><span class="s2">());</span>
+                        <span class="s1">String filePath </span><span class="s2">= </span><span class="s1">getTableView</span><span class="s2">().</span><span class="s1">getItems</span><span class="s2">().</span><span class="s1">get</span><span class="s2">(</span><span class="s1">getIndex</span><span class="s2">()).</span><span class="s1">getImagePath</span><span class="s2">();</span>
+                        <span class="s0">if </span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s5">&quot;&quot;</span><span class="s2">)){</span>
+                            <span class="s1">filePath </span><span class="s2">= </span><span class="s5">&quot;imgs/default.png&quot;</span><span class="s2">;</span>
+                        <span class="s2">}</span>
+                        <span class="s1">String url </span><span class="s2">= </span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">).</span><span class="s1">toExternalForm</span><span class="s2">();</span>
+                        <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Image</span><span class="s2">(</span><span class="s1">url</span><span class="s2">));</span>
+                        <span class="s1">setGraphic</span><span class="s2">(</span><span class="s1">imageView</span><span class="s2">);</span>
+                    <span class="s2">}</span>
+                    <span class="s0">else </span><span class="s1">setGraphic</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+
+                <span class="s2">}</span>
+            <span class="s2">};</span>
+
+            <span class="s0">return </span><span class="s1">cell</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+
+
+
+
+
+
+
+
+
+        <span class="s4">//Xoa san pham</span>
+        <span class="s1">actionCol</span><span class="s2">.</span><span class="s1">setCellFactory</span><span class="s2">(</span><span class="s1">param -&gt; </span><span class="s2">{</span>
+            <span class="s0">try</span><span class="s2">{</span>
+                <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s5">&quot;components/delete-btn-component.fxml&quot;</span><span class="s2">));</span>
+                <span class="s0">final </span><span class="s1">Button btn </span><span class="s2">= </span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+                <span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Button</span><span class="s2">&gt; </span><span class="s1">cell </span><span class="s2">= </span><span class="s0">new </span><span class="s1">TableCell</span><span class="s2">&lt;</span><span class="s1">Product</span><span class="s2">, </span><span class="s1">Button</span><span class="s2">&gt;(){</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">Button item</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">empty</span><span class="s2">) {</span>
+                        <span class="s0">super</span><span class="s2">.</span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s1">empty</span><span class="s2">);</span>
+                        <span class="s0">if </span><span class="s2">(!</span><span class="s1">empty</span><span class="s2">){</span>
+                            <span class="s1">btn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+                                <span class="s0">int </span><span class="s1">rowID </span><span class="s2">= </span><span class="s1">getIndex</span><span class="s2">();</span>
+                                <span class="s1">Product product </span><span class="s2">= </span><span class="s1">products</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">rowID</span><span class="s2">);</span>
+                                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s5">&quot;Xoa san pham&quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getProductName</span><span class="s2">());</span>
+
+                                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">CONFIRMATION</span><span class="s2">, </span><span class="s5">&quot;Delete &quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getProductName</span><span class="s2">() + </span><span class="s5">&quot; ?&quot;</span><span class="s2">, </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">YES</span><span class="s2">, </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">NO</span><span class="s2">, </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">CANCEL</span><span class="s2">);</span>
+                                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+
+                                <span class="s0">if </span><span class="s2">(</span><span class="s1">alert</span><span class="s2">.</span><span class="s1">getResult</span><span class="s2">() == </span><span class="s1">ButtonType</span><span class="s2">.</span><span class="s1">YES</span><span class="s2">) {</span>
+                                    <span class="s1">deleteProductByID</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getProductID</span><span class="s2">());</span>
+                                <span class="s2">}</span>
+                            <span class="s2">});</span>
+
+                            <span class="s1">setGraphic</span><span class="s2">(</span><span class="s1">btn</span><span class="s2">);</span>
+                            <span class="s1">setAlignment</span><span class="s2">(</span><span class="s1">Pos</span><span class="s2">.</span><span class="s1">CENTER</span><span class="s2">);</span>
+                            <span class="s1">setContentDisplay</span><span class="s2">(</span><span class="s1">ContentDisplay</span><span class="s2">.</span><span class="s1">GRAPHIC_ONLY</span><span class="s2">);</span>
+                        <span class="s2">}</span>
+                        <span class="s0">else </span><span class="s2">{</span>
+                            <span class="s1">setGraphic</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+                        <span class="s2">}</span>
+
+                    <span class="s2">}</span>
+                <span class="s2">};</span>
+                <span class="s0">return </span><span class="s1">cell</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s0">return null</span><span class="s2">;</span>
+        <span class="s2">});</span>
+
+
+
+
+        <span class="s1">loadCategories</span><span class="s2">();</span>
+        <span class="s1">loadProducts</span><span class="s2">();</span>
+        <span class="s1">addBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+                    <span class="s4">//Mo window nhap san pham Stage stage = new Stage;</span>
+                    <span class="s0">try</span><span class="s2">{</span>
+                        <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+                        <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s5">&quot;windows/add-product-window.fxml&quot;</span><span class="s2">));</span>
+                        <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s3">400</span><span class="s2">, </span><span class="s3">600</span><span class="s2">);</span>
+                        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+                        <span class="s1">AddProductController controller </span><span class="s2">= </span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">getController</span><span class="s2">();</span>
+                        <span class="s1">controller</span><span class="s2">.</span><span class="s1">initParams</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">categories</span><span class="s2">);</span>
+                        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s5">&quot;Thêm Sản Phẩm!&quot;</span><span class="s2">);</span>
+                        <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+                        <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+                    <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+                        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+                    <span class="s2">}</span>
+
+                <span class="s2">}</span>
+        <span class="s2">);</span>
+        <span class="s1">tableView</span><span class="s2">.</span><span class="s1">setOnMouseClicked</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">event</span><span class="s2">.</span><span class="s1">getClickCount</span><span class="s2">() == </span><span class="s3">2</span><span class="s2">) </span><span class="s4">//Checking double click</span>
+            <span class="s2">{</span>
+                <span class="s4">//dong` double click</span>
+                <span class="s1">Product product </span><span class="s2">= </span><span class="s1">tableView</span><span class="s2">.</span><span class="s1">getSelectionModel</span><span class="s2">().</span><span class="s1">getSelectedItem</span><span class="s2">();</span>
+                <span class="s4">//Mo window nhap san stage = new Stage;</span>
+                <span class="s0">try</span><span class="s2">{</span>
+                    <span class="s1">Stage stage </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Stage</span><span class="s2">();</span>
+                    <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s5">&quot;windows/edit-product-window.fxml&quot;</span><span class="s2">));</span>
+                    <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s3">400</span><span class="s2">, </span><span class="s3">600</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+                    <span class="s1">EditProductController controller </span><span class="s2">= </span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">getController</span><span class="s2">();</span>
+                    <span class="s1">controller</span><span class="s2">.</span><span class="s1">initParams</span><span class="s2">(</span><span class="s0">this</span><span class="s2">, </span><span class="s1">categories</span><span class="s2">, </span><span class="s1">product</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s5">&quot;Sửa Sản Phẩm!&quot;</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+
+                <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+    <span class="s0">void </span><span class="s1">deleteProductByID</span><span class="s2">(</span><span class="s0">int </span><span class="s1">productID</span><span class="s2">){</span>
+        <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s1">String sql </span><span class="s2">=  </span><span class="s5">&quot;UPDATE products </span><span class="s0">\n</span><span class="s5">&quot; </span><span class="s2">+</span>
+                    <span class="s5">&quot;SET isActive = false &quot; </span><span class="s2">+</span>
+                    <span class="s5">&quot;WHERE productID = &quot; </span><span class="s2">+ </span><span class="s1">productID</span><span class="s2">;</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">);</span>
+            <span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">queryUpdate</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">);</span>
+            <span class="s1">loadProducts</span><span class="s2">();</span>
+        <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s1">Button deleteButton </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Button</span><span class="s2">();</span>
+    <span class="s4">//deleteButton.setOnAction(event -&gt; )</span>
+    <span class="s0">void </span><span class="s1">loadCategories</span><span class="s2">(){</span>
+        <span class="s1">categories</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+        <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s1">ResultSet resultSet </span><span class="s2">= </span><span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">queryResults</span><span class="s2">(</span><span class="s5">&quot;select * from categories&quot;</span><span class="s2">);</span>
+            <span class="s0">while</span><span class="s2">(</span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">next</span><span class="s2">()){</span>
+                <span class="s0">int </span><span class="s1">categoryID </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+                <span class="s1">String categoryName </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">2</span><span class="s2">);</span>
+                <span class="s1">Category category </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Category</span><span class="s2">(</span><span class="s1">categoryID</span><span class="s2">, </span><span class="s1">categoryName</span><span class="s2">);</span>
+                <span class="s1">categories</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">category</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">void </span><span class="s1">loadProducts</span><span class="s2">(){</span>
+        <span class="s1">products</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+        <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s1">ResultSet resultSet </span><span class="s2">= </span><span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">queryResults</span><span class="s2">(</span><span class="s5">&quot;select * from products where isActive = true limit &quot; </span><span class="s2">+ </span><span class="s1">pageSize </span><span class="s2">+ </span><span class="s5">&quot; offset &quot; </span><span class="s2">+ (</span><span class="s1">currentPage</span><span class="s2">-</span><span class="s3">1</span><span class="s2">)*</span><span class="s1">pageSize </span><span class="s2">);</span>
+            <span class="s0">while</span><span class="s2">(</span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">next</span><span class="s2">()){</span>
+                <span class="s0">int </span><span class="s1">productID </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+                <span class="s1">String productName </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">2</span><span class="s2">);</span>
+                <span class="s0">int </span><span class="s1">categoryID </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">3</span><span class="s2">);</span>
+                <span class="s1">String imagePath </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+                <span class="s1">String ingredient </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+                <span class="s0">long </span><span class="s1">price </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getLong</span><span class="s2">(</span><span class="s3">6</span><span class="s2">);</span>
+
+                <span class="s1">Category category </span><span class="s2">= </span><span class="s1">getCategoryByID</span><span class="s2">(</span><span class="s1">categoryID</span><span class="s2">);</span>
+                <span class="s1">Product product </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Product</span><span class="s2">(</span><span class="s1">productID</span><span class="s2">, </span><span class="s1">productName</span><span class="s2">,</span><span class="s1">category</span><span class="s2">, </span><span class="s1">imagePath</span><span class="s2">, </span><span class="s1">ingredient</span><span class="s2">, </span><span class="s1">price</span><span class="s2">);</span>
+                <span class="s1">products</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">product</span><span class="s2">);</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">MessageFormat</span><span class="s2">.</span><span class="s1">format</span><span class="s2">(</span><span class="s5">&quot;{0} - {1} - {2} - {3} - {4} - {5}&quot;</span><span class="s2">, </span><span class="s1">productID</span><span class="s2">, </span><span class="s1">productName</span><span class="s2">, </span><span class="s1">categoryID</span><span class="s2">, </span><span class="s1">imagePath</span><span class="s2">, </span><span class="s1">ingredient</span><span class="s2">, </span><span class="s1">price</span><span class="s2">));</span>
+            <span class="s2">}</span>
+            <span class="s1">nextBtn</span><span class="s2">.</span><span class="s1">setDisable</span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">== </span><span class="s1">totalPage</span><span class="s2">);</span>
+            <span class="s1">prevBtn</span><span class="s2">.</span><span class="s1">setDisable</span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">== </span><span class="s3">1</span><span class="s2">);</span>
+        <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">private </span><span class="s1">Category getCategoryByID</span><span class="s2">(</span><span class="s0">int </span><span class="s1">categoryID</span><span class="s2">){</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Category category</span><span class="s2">: </span><span class="s1">categories</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">category</span><span class="s2">.</span><span class="s1">getCategoryID</span><span class="s2">() == </span><span class="s1">categoryID</span><span class="s2">){</span>
+                <span class="s0">return </span><span class="s1">category</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">addProduct</span><span class="s2">(</span><span class="s1">Product p</span><span class="s2">){</span>
+        <span class="s1">products</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">p</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s0">int </span><span class="s1">countAllProducts</span><span class="s2">(){</span>
+        <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">try</span><span class="s2">{</span>
+            <span class="s1">ResultSet resultSet </span><span class="s2">= </span><span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">queryResults</span><span class="s2">(</span><span class="s5">&quot;select count(*) from products&quot;</span><span class="s2">);</span>
+            <span class="s0">if</span><span class="s2">(</span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">next</span><span class="s2">()){</span>
+                <span class="s0">return </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+        <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">){</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s3">0</span><span class="s2">;</span>
+    <span class="s2">}</span>
+    <span class="s0">public void </span><span class="s1">updateProduct</span><span class="s2">(</span><span class="s1">Product p</span><span class="s2">){</span>
+        <span class="s0">for</span><span class="s2">(</span><span class="s1">Product product</span><span class="s2">: </span><span class="s1">products</span><span class="s2">){</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getProductID</span><span class="s2">() == </span><span class="s1">p</span><span class="s2">.</span><span class="s1">getProductID</span><span class="s2">()){</span>
+                <span class="s1">product</span><span class="s2">.</span><span class="s1">setProductName</span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getProductName</span><span class="s2">());</span>
+                <span class="s1">product</span><span class="s2">.</span><span class="s1">setCategory</span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getCategory</span><span class="s2">());</span>
+                <span class="s1">product</span><span class="s2">.</span><span class="s1">setImagePath</span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getImagePath</span><span class="s2">());</span>
+                <span class="s1">product</span><span class="s2">.</span><span class="s1">setIngredient</span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getIngredient</span><span class="s2">());</span>
+                <span class="s1">product</span><span class="s2">.</span><span class="s1">setPrice</span><span class="s2">(</span><span class="s1">p</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">());</span>
+                <span class="s0">break</span><span class="s2">;</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+    <span class="s0">private void </span><span class="s1">filterProducts</span><span class="s2">(</span><span class="s1">String searchText</span><span class="s2">) {</span>
+        <span class="s1">products</span><span class="s2">.</span><span class="s1">clear</span><span class="s2">();</span>
+
+        <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">String searchQuery </span><span class="s2">= </span><span class="s5">&quot;SELECT * FROM products WHERE isActive = true AND productName LIKE '%&quot; </span><span class="s2">+ </span><span class="s1">searchText </span><span class="s2">+ </span><span class="s5">&quot;%' LIMIT &quot; </span><span class="s2">+ </span><span class="s1">pageSize </span><span class="s2">+ </span><span class="s5">&quot; OFFSET &quot; </span><span class="s2">+ (</span><span class="s1">currentPage </span><span class="s2">- </span><span class="s3">1</span><span class="s2">) * </span><span class="s1">pageSize</span><span class="s2">;</span>
+            <span class="s1">ResultSet resultSet </span><span class="s2">= </span><span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">queryResults</span><span class="s2">(</span><span class="s1">searchQuery</span><span class="s2">);</span>
+
+            <span class="s0">while </span><span class="s2">(</span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">next</span><span class="s2">()) {</span>
+                <span class="s0">int </span><span class="s1">productID </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">1</span><span class="s2">);</span>
+                <span class="s1">String productName </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">2</span><span class="s2">);</span>
+                <span class="s0">int </span><span class="s1">categoryID </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getInt</span><span class="s2">(</span><span class="s3">3</span><span class="s2">);</span>
+                <span class="s1">String imagePath </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">4</span><span class="s2">);</span>
+                <span class="s1">String ingredient </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s3">5</span><span class="s2">);</span>
+                <span class="s0">long </span><span class="s1">price </span><span class="s2">= </span><span class="s1">resultSet</span><span class="s2">.</span><span class="s1">getLong</span><span class="s2">(</span><span class="s3">6</span><span class="s2">);</span>
+
+                <span class="s1">Category category </span><span class="s2">= </span><span class="s1">getCategoryByID</span><span class="s2">(</span><span class="s1">categoryID</span><span class="s2">);</span>
+                <span class="s1">Product product </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Product</span><span class="s2">(</span><span class="s1">productID</span><span class="s2">, </span><span class="s1">productName</span><span class="s2">, </span><span class="s1">category</span><span class="s2">, </span><span class="s1">imagePath</span><span class="s2">, </span><span class="s1">ingredient</span><span class="s2">, </span><span class="s1">price</span><span class="s2">);</span>
+                <span class="s1">products</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">product</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+            <span class="s1">nextBtn</span><span class="s2">.</span><span class="s1">setDisable</span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">== </span><span class="s1">totalPage</span><span class="s2">);</span>
+            <span class="s1">prevBtn</span><span class="s2">.</span><span class="s1">setDisable</span><span class="s2">(</span><span class="s1">currentPage </span><span class="s2">== </span><span class="s3">1</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">ex</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

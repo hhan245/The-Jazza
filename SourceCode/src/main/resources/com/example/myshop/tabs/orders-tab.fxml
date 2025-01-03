@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #F7F3EF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myshop.controllers.OrdersTabController">
+    <children>
+        <Label layoutX="39.0" layoutY="9.0" text="Danh sách đơn hàng" textFill="#222f52">
+         <font>
+            <Font name="Alegreya Medium" size="25.0" />
+         </font></Label>
+      <HBox fx:id="line_shape1" layoutX="43.0" layoutY="119.0" prefHeight="563.0" prefWidth="918.0" stylesheets="@../css/order.css" />
+        <TableView fx:id="tableView" layoutX="61.0" layoutY="135.0" prefHeight="528.0" prefWidth="884.0" stylesheets="@../css/tableview.css">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="61.5999755859375" text="ID" />
+                <TableColumn fx:id="productsCol" prefWidth="154.40000915527344" text="Sản phẩm" />
+                <TableColumn fx:id="dateTimeCol" prefWidth="88.800048828125" text="Thời gian" />
+                <TableColumn fx:id="totalPriceCol" prefWidth="104.7999267578125" text="Tổng giá tiền" />
+                <TableColumn fx:id="customerNameCol" prefWidth="104.7999267578125" text="Tên khách hàng" />
+                <TableColumn fx:id="phoneNumberCol" prefWidth="143.199951171875" text="Số điện thoại" />
+                <TableColumn fx:id="statusCol" prefWidth="171.199951171875" text="Trạng thái" />
+                <TableColumn fx:id="actionCol" prefWidth="70.66680908203125" />
+            </columns>
+        </TableView>
+        <Button fx:id="addBtn" layoutX="860.0" layoutY="53.0" mnemonicParsing="false" stylesheets="@../css/order.css" text="Tạo đơn hàng" />
+        <HBox alignment="CENTER" layoutX="465.0" layoutY="703.0" spacing="5.0">
+            <children>
+                <Button fx:id="prevBtn" mnemonicParsing="false" text="&lt;" />
+                <Label fx:id="currentPageLabel" />
+                <Label text="/" />
+                <Label fx:id="totalPageLabel" />
+                <Button fx:id="nextBtn" mnemonicParsing="false" text="&gt;" />
+            </children>
+        </HBox>
+      <ComboBox fx:id="comboBoxOrder" layoutX="43.0" layoutY="54.0" prefHeight="26.0" prefWidth="115.0" stylesheets="@../css/order.css" />
+      <HBox fx:id="datePickerHBox" alignment="CENTER_LEFT" layoutX="185.0" layoutY="53.0" spacing="20.0">
+         <children>
+            <Label text="Từ" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Bold" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="fromDatePicker" prefHeight="26.0" prefWidth="96.0" stylesheets="@../css/stats.css" />
+            <Label text="Đến" textFill="#222f52">
+               <font>
+                  <Font name="BT Beau Sans Bold" size="12.0" />
+               </font></Label>
+            <DatePicker fx:id="toDatePicker" prefHeight="26.0" prefWidth="99.0" stylesheets="@../css/stats.css" />
+            <Button fx:id="okBtn" mnemonicParsing="false" stylesheets="@../css/order.css" text="OK" />
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

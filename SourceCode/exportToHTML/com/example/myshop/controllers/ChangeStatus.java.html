@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>ChangeStatus.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ChangeStatus.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Order</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Status</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">ObservableList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">ComboBox</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">Connection</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">DriverManager</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">PreparedStatement</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.</span><span class="s1">SQLException</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ChangeStatus </span><span class="s2">{</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ComboBox</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">statusComboBox</span><span class="s2">;</span>
+
+    <span class="s0">private </span><span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">Status</span><span class="s2">&gt; </span><span class="s1">statuses</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">OrdersTabController ordersTabController</span><span class="s2">;</span>
+        <span class="s0">public static void </span><span class="s1">updateStatus</span><span class="s2">(</span><span class="s1">Order order</span><span class="s2">) {</span>
+            <span class="s3">// Kết nối đến cơ sở dữ liệu (sử dụng JDBC)</span>
+            <span class="s0">try </span><span class="s2">{</span>
+                <span class="s1">MySQLConnector connector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+                <span class="s3">// Chuẩn bị truy vấn SQL để cập nhật trạng thái</span>
+                <span class="s1">String sql </span><span class="s2">= </span><span class="s4">&quot;UPDATE orders SET StatusID = ? WHERE OrderID = ?&quot;</span><span class="s2">;</span>
+                <span class="s1">Connection connection </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+                <span class="s0">try </span><span class="s2">(</span><span class="s1">PreparedStatement preparedStatement </span><span class="s2">= </span><span class="s1">connection</span><span class="s2">.</span><span class="s1">prepareStatement</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">)) {</span>
+                    <span class="s3">// Đặt giá trị cho các tham số trong truy vấn SQL</span>
+                    <span class="s1">preparedStatement</span><span class="s2">.</span><span class="s1">setString</span><span class="s2">(</span><span class="s5">1</span><span class="s2">, </span><span class="s1">String</span><span class="s2">.</span><span class="s1">valueOf</span><span class="s2">(</span><span class="s1">order</span><span class="s2">.</span><span class="s1">getStatus</span><span class="s2">()));</span>
+                    <span class="s1">preparedStatement</span><span class="s2">.</span><span class="s1">setInt</span><span class="s2">(</span><span class="s5">2</span><span class="s2">, </span><span class="s1">order</span><span class="s2">.</span><span class="s1">getStatus</span><span class="s2">().</span><span class="s1">getStatusID</span><span class="s2">());</span>
+
+                    <span class="s3">// Thực hiện truy vấn cập nhật</span>
+                    <span class="s1">preparedStatement</span><span class="s2">.</span><span class="s1">executeUpdate</span><span class="s2">();</span>
+                <span class="s2">}</span>
+            <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException e</span><span class="s2">) {</span>
+                <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">(); </span><span class="s3">// Xử lý lỗi nếu có</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>

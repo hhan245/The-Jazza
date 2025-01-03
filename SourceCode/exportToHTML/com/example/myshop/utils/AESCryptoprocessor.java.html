@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>AESCryptoprocessor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AESCryptoprocessor.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">crypto</span><span class="s2">.</span><span class="s1">Cipher</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">crypto</span><span class="s2">.</span><span class="s1">spec</span><span class="s2">.</span><span class="s1">SecretKeySpec</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">charset</span><span class="s2">.</span><span class="s1">StandardCharsets</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">MessageDigest</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">security</span><span class="s2">.</span><span class="s1">NoSuchAlgorithmException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Arrays</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Base64</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">AESCryptoprocessor </span><span class="s2">{</span>
+    <span class="s0">final </span><span class="s1">String secretKeyString </span><span class="s2">= </span><span class="s3">&quot;day la key cua toi&quot;</span><span class="s2">;</span>
+    <span class="s0">private static </span><span class="s1">SecretKeySpec secretKey</span><span class="s2">;</span>
+    <span class="s0">private static byte</span><span class="s2">[] </span><span class="s1">key</span><span class="s2">;</span>
+    <span class="s0">private static final </span><span class="s1">String ALGORITHM </span><span class="s2">= </span><span class="s3">&quot;AES&quot;</span><span class="s2">;</span>
+
+    <span class="s0">public void </span><span class="s1">prepareSecreteKey</span><span class="s2">(</span><span class="s1">String myKey</span><span class="s2">) {</span>
+        <span class="s1">MessageDigest sha </span><span class="s2">= </span><span class="s0">null</span><span class="s2">;</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">key </span><span class="s2">= </span><span class="s1">myKey</span><span class="s2">.</span><span class="s1">getBytes</span><span class="s2">(</span><span class="s1">StandardCharsets</span><span class="s2">.</span><span class="s1">UTF_8</span><span class="s2">);</span>
+            <span class="s1">sha </span><span class="s2">= </span><span class="s1">MessageDigest</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">(</span><span class="s3">&quot;SHA-1&quot;</span><span class="s2">);</span>
+            <span class="s1">key </span><span class="s2">= </span><span class="s1">sha</span><span class="s2">.</span><span class="s1">digest</span><span class="s2">(</span><span class="s1">key</span><span class="s2">);</span>
+            <span class="s1">key </span><span class="s2">= </span><span class="s1">Arrays</span><span class="s2">.</span><span class="s1">copyOf</span><span class="s2">(</span><span class="s1">key</span><span class="s2">, </span><span class="s4">16</span><span class="s2">);</span>
+            <span class="s1">secretKey </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SecretKeySpec</span><span class="s2">(</span><span class="s1">key</span><span class="s2">, </span><span class="s1">ALGORITHM</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">NoSuchAlgorithmException e</span><span class="s2">) {</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String encrypt</span><span class="s2">(</span><span class="s1">String strToEncrypt</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">prepareSecreteKey</span><span class="s2">(</span><span class="s1">secretKeyString</span><span class="s2">);</span>
+            <span class="s1">Cipher cipher </span><span class="s2">= </span><span class="s1">Cipher</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">(</span><span class="s1">ALGORITHM</span><span class="s2">);</span>
+            <span class="s1">cipher</span><span class="s2">.</span><span class="s1">init</span><span class="s2">(</span><span class="s1">Cipher</span><span class="s2">.</span><span class="s1">ENCRYPT_MODE</span><span class="s2">, </span><span class="s1">secretKey</span><span class="s2">);</span>
+            <span class="s0">return </span><span class="s1">Base64</span><span class="s2">.</span><span class="s1">getEncoder</span><span class="s2">().</span><span class="s1">encodeToString</span><span class="s2">(</span><span class="s1">cipher</span><span class="s2">.</span><span class="s1">doFinal</span><span class="s2">(</span><span class="s1">strToEncrypt</span><span class="s2">.</span><span class="s1">getBytes</span><span class="s2">(</span><span class="s3">&quot;UTF-8&quot;</span><span class="s2">)));</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error while encrypting: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">String decrypt</span><span class="s2">(</span><span class="s1">String strToDecrypt</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">prepareSecreteKey</span><span class="s2">(</span><span class="s1">secretKeyString</span><span class="s2">);</span>
+            <span class="s1">Cipher cipher </span><span class="s2">= </span><span class="s1">Cipher</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">(</span><span class="s1">ALGORITHM</span><span class="s2">);</span>
+            <span class="s1">cipher</span><span class="s2">.</span><span class="s1">init</span><span class="s2">(</span><span class="s1">Cipher</span><span class="s2">.</span><span class="s1">DECRYPT_MODE</span><span class="s2">, </span><span class="s1">secretKey</span><span class="s2">);</span>
+            <span class="s0">return new </span><span class="s1">String</span><span class="s2">(</span><span class="s1">cipher</span><span class="s2">.</span><span class="s1">doFinal</span><span class="s2">(</span><span class="s1">Base64</span><span class="s2">.</span><span class="s1">getDecoder</span><span class="s2">().</span><span class="s1">decode</span><span class="s2">(</span><span class="s1">strToDecrypt</span><span class="s2">)));</span>
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Error while decrypting: &quot; </span><span class="s2">+ </span><span class="s1">e</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+        <span class="s2">}</span>
+        <span class="s0">return null</span><span class="s2">;</span>
+
+
+
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

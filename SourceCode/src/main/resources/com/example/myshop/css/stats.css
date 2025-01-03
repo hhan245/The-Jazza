@@ -1,0 +1,159 @@
+#line_shape{
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #222F52;
+    -fx-border-width: 1;
+}
+#line_shape1{
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #222F52;
+    -fx-border-width: 1;
+}
+#comboBox{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-font-family: "BT Beau Sans";
+
+    -fx-font-size: 12px;
+}
+
+
+#comboBox .list-cell {
+    -fx-text-fill: #F7F3EF;
+}
+
+#comboBox .list-view .list-cell {
+    -fx-text-fill: #222F52; /* Set the text color of the items in the list view */
+}
+#comboBox .list-view .list-cell:focused {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}
+
+/* combo-box hover text */
+#comboBox .list-view .list-cell:hover {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}
+
+* {
+    -fx-primary-color: #222F52;
+    -fx-secondary-color: #4B6EAF;
+    -fx-light-grey-color: #d1d1d1;
+
+    -fx-focus-color: -fx-secondary-color;
+}
+#fromDatePicker {
+    -fx-background-color: #222F52;
+    -fx-text-fill: #F7F3EF;
+    -fx-font-family: 'BT Beau Sans';
+    -fx-font-size: 12px;
+}
+
+#fromDatePicker .arrow-button {
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 0;
+}
+#fromDatePicker .arrow-button:hover {
+    -fx-background-color: -fx-secondary-color;
+}
+#fromDatePicker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+#fromDatePicker .cell {
+    -fx-background-color: white;
+}
+#fromDatePicker .cell:hover {
+    -fx-background-color: -fx-light-grey-color;
+}
+#fromDatePicker .cell:focused {
+    -fx-background-color: -fx-light-grey-color;
+}
+#fromDatePicker .selected {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+}
+#fromDatePicker .selected:focused {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+}
+#fromDatePicker-popup  {
+    -fx-border-color: transparent;
+}
+#fromDatePicker-popup .month-year-pane {
+    -fx-background-color: -fx-primary-color;
+}
+#fromDatePicker-popup .month-year-pane .label {
+    -fx-text-fill: white;
+}
+#fromDatePicker-popup .week-number-cell {
+    -fx-text-fill: -fx-secondary-color;
+}
+#fromDatePicker-popup .spinner .button .left-arrow,
+#fromDatePicker-popup .spinner .button .right-arrow {
+    -fx-background-color: white;
+}
+
+
+
+
+
+#toDatePicker {
+    -fx-background-color: #222F52;
+    -fx-text-fill: #F7F3EF;
+    -fx-font-family: 'BT Beau Sans';
+    -fx-font-size: 12px;
+}
+
+#toDatePicker .arrow-button {
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 0;
+}
+#toDatePicker .arrow-button:hover {
+    -fx-background-color: -fx-secondary-color;
+}
+#toDatePicker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+#toDatePicker .cell {
+    -fx-background-color: white;
+}
+#toDatePicker .cell:hover {
+    -fx-background-color: -fx-light-grey-color;
+}
+#toDatePicker .cell:focused {
+    -fx-background-color: -fx-light-grey-color;
+}
+#toDatePicker .selected {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+}
+#toDatePicker .selected:focused {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: white;
+}
+#toDatePicker-popup  {
+    -fx-border-color: transparent;
+}
+#toDatePicker-popup .month-year-pane {
+    -fx-background-color: -fx-primary-color;
+}
+#toDatePickerr-popup .month-year-pane .label {
+    -fx-text-fill: white;
+}
+#toDatePicker-popup .week-number-cell {
+    -fx-text-fill: -fx-secondary-color;
+}
+#toDatePicker-popup .spinner .button .left-arrow,
+#toDatePicker-popup .spinner .button .right-arrow {
+    -fx-background-color: white;
+}
+
+#okBtn{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-text-fill: #F4F2EF;
+    -fx-font-family: "BT Beau Sans";
+    -fx-font-weight: bold;
+}

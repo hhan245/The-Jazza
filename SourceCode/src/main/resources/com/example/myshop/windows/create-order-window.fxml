@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F7F3EF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myshop.controllers.CreateOrderController">
+    <children>
+        <TableView fx:id="tableView" layoutX="38.0" layoutY="82.0" prefHeight="248.0" prefWidth="723.0" stylesheets="@../css/tableview.css">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="57.60003662109375" text="ID" />
+                <TableColumn fx:id="imageCol" prefWidth="135.99996948242188" text="Hình ảnh" />
+                <TableColumn fx:id="nameCol" prefWidth="118.39990997314453" text="Tên sản phẩm" />
+                <TableColumn fx:id="priceCol" prefWidth="116.0" text="Giá tiền" />
+                <TableColumn fx:id="categoryCol" prefWidth="137.5999755859375" text="Loại sản phẩm " />
+            <TableColumn fx:id="ingredientCol" prefWidth="150.39996337890625" text="Nguyên liệu" />
+            </columns>
+        </TableView>
+        <ListView fx:id="listView" layoutX="275.0" layoutY="342.0" prefHeight="236.0" prefWidth="250.0" />
+        <Label layoutX="337.0" layoutY="14.0" text="Tạo đơn hàng" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="18.0" />
+         </font></Label>
+        <Label layoutX="606.0" layoutY="368.0" text="Thời gian:" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="dateTime" layoutX="672.0" layoutY="368.0" text="ss" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></Label>
+        <Label layoutX="605.0" layoutY="463.0" text="Thành giá:" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Label>
+        <Label fx:id="totalPrice" layoutX="674.0" layoutY="463.0" text="Label" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></Label>
+        <Button fx:id="okBtn" layoutX="621.0" layoutY="540.0" lineSpacing="30.0" mnemonicParsing="false" stylesheets="@../css/order.css" text="OK" />
+        <Button fx:id="cancelBtn" layoutX="556.0" layoutY="540.0" lineSpacing="30.0" mnemonicParsing="false" stylesheets="@../css/order.css" text="Hủy" />
+      <TextField fx:id="customerNameInput" layoutX="34.0" layoutY="374.0" />
+      <Label layoutX="35.0" layoutY="349.0" text="Nhập tên khách hàng " textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="34.0" layoutY="487.0" text="Trạng thái " textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Label>
+      <ComboBox fx:id="statusComboBox" layoutX="33.0" layoutY="514.0" prefWidth="150.0" promptText="Chọn Trạng thái..." stylesheets="@../css/order.css" />
+      <Button fx:id="importBtn" layoutX="678.0" layoutY="540.0" lineSpacing="30.0" mnemonicParsing="false" onAction="#handleImportBtn" stylesheets="@../css/order.css" text="Xuất hóa đơn" />
+      <Label layoutX="35.0" layoutY="419.0" text="Nhập số điện thoại " textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="phoneNumberInput" layoutX="34.0" layoutY="446.0" />
+      <TextField fx:id="searchField" layoutX="37.0" layoutY="50.0" prefHeight="27.0" prefWidth="337.0" promptText="Tìm kiếm Sản phẩm">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></TextField>
+      <TabPane fx:id="mainTabPane" layoutX="690.0" layoutY="340.0" prefHeight="78.0" prefWidth="70.0" tabClosingPolicy="UNAVAILABLE" />
+      <Label fx:id="realPrice" layoutX="670.0" layoutY="400.0" text="Label" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></Label>
+      <Label fx:id="discount" layoutX="669.0" layoutY="432.0" text="Label" textFill="#222f52">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></Label>
+      <Text fill="#222f52" layoutX="604.0" layoutY="443.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Giảm giá:">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#222f52" layoutX="605.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tổng:">
+         <font>
+            <Font name="BT Beau Sans Bold" size="12.0" />
+         </font></Text>
+    </children>
+</AnchorPane>

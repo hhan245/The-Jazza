@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>AddProductController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+AddProductController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">Main</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Category</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Product</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">ObservableList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">Initializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Node</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Alert</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">ComboBox</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">TextField</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">FileChooser</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">File</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">URL</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Files</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Path</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">Paths</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">nio</span><span class="s2">.</span><span class="s1">file</span><span class="s2">.</span><span class="s1">StandardCopyOption</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">MessageFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">NumberFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">SimpleDateFormat</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Date</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ResourceBundle</span><span class="s2">;</span>
+
+
+<span class="s0">public class </span><span class="s1">AddProductController </span><span class="s0">implements </span><span class="s1">Initializable </span><span class="s2">{</span>
+    <span class="s1">Product product</span><span class="s2">;</span>
+    <span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">Category</span><span class="s2">&gt; </span><span class="s1">categories</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button addBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ComboBox</span><span class="s2">&lt;</span><span class="s1">Category</span><span class="s2">&gt; </span><span class="s1">categoryComboBox</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ImageView imageView</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField nameInput</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField priceInput</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField ingredientInput</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button selectImageButton</span><span class="s2">;</span>
+
+    <span class="s3">//luu context cua man hinh danh sach san pham de update</span>
+    <span class="s0">private </span><span class="s1">ProductsTabController productsTabController</span><span class="s2">;</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">initialize</span><span class="s2">(</span><span class="s1">URL location</span><span class="s2">, </span><span class="s1">ResourceBundle resources</span><span class="s2">) {</span>
+        <span class="s1">addBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">getImagePath</span><span class="s2">() == </span><span class="s0">null </span><span class="s2">|| </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getImagePath</span><span class="s2">().</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+                <span class="s3">// Hiển thị cảnh báo nếu không có hình ảnh được chọn</span>
+                <span class="s1">Alert alert </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Alert</span><span class="s2">(</span><span class="s1">Alert</span><span class="s2">.</span><span class="s1">AlertType</span><span class="s2">.</span><span class="s1">WARNING</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;Cảnh báo&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setHeaderText</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">setContentText</span><span class="s2">(</span><span class="s4">&quot;Vui lòng chọn một hình ảnh trước khi thêm sản phẩm.&quot;</span><span class="s2">);</span>
+                <span class="s1">alert</span><span class="s2">.</span><span class="s1">showAndWait</span><span class="s2">();</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s3">// Thêm vào Database nếu có hình ảnh được chọn</span>
+                <span class="s1">MySQLConnector connector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+                <span class="s1">String sql </span><span class="s2">= </span><span class="s4">&quot;INSERT INTO Products(ProductName, CategoryID, ImagePath, Ingredient, Price, isActive)</span><span class="s0">\n</span><span class="s4">&quot; </span><span class="s2">+</span>
+                        <span class="s4">&quot;VALUES ('&quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getProductName</span><span class="s2">() + </span><span class="s4">&quot;', &quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getCategory</span><span class="s2">().</span><span class="s1">getCategoryID</span><span class="s2">() + </span><span class="s4">&quot;, '&quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getImagePath</span><span class="s2">() + </span><span class="s4">&quot;', '&quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getIngredient</span><span class="s2">() + </span><span class="s4">&quot;', '&quot; </span><span class="s2">+ </span><span class="s1">product</span><span class="s2">.</span><span class="s1">getPrice</span><span class="s2">() + </span><span class="s4">&quot;', true);&quot;</span><span class="s2">;</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">);</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">connector</span><span class="s2">.</span><span class="s1">queryUpdate</span><span class="s2">(</span><span class="s1">sql</span><span class="s2">)) {</span>
+                    <span class="s1">productsTabController</span><span class="s2">.</span><span class="s1">loadProducts</span><span class="s2">();</span>
+                    <span class="s2">((</span><span class="s1">Node</span><span class="s2">)(</span><span class="s1">event</span><span class="s2">.</span><span class="s1">getSource</span><span class="s2">())).</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">().</span><span class="s1">hide</span><span class="s2">();</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+        <span class="s1">selectImageButton</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+            <span class="s1">FileChooser fileChooser </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">();</span>
+            <span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter imageFilter</span>
+                    <span class="s2">= </span><span class="s0">new </span><span class="s1">FileChooser</span><span class="s2">.</span><span class="s1">ExtensionFilter</span><span class="s2">(</span><span class="s4">&quot;Image Files&quot;</span><span class="s2">, </span><span class="s4">&quot;*.jpg&quot;</span><span class="s2">, </span><span class="s4">&quot;*.png&quot;</span><span class="s2">);</span>
+            <span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">getExtensionFilters</span><span class="s2">().</span><span class="s1">add</span><span class="s2">(</span><span class="s1">imageFilter</span><span class="s2">);</span>
+            <span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s4">&quot;Select a File&quot;</span><span class="s2">);</span>
+
+            <span class="s3">// Show the file dialog to pick a file</span>
+            <span class="s1">File selectedFile </span><span class="s2">= </span><span class="s1">fileChooser</span><span class="s2">.</span><span class="s1">showOpenDialog</span><span class="s2">( (</span><span class="s1">Stage</span><span class="s2">)((</span><span class="s1">Node</span><span class="s2">)</span><span class="s1">event</span><span class="s2">.</span><span class="s1">getSource</span><span class="s2">()).</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">());</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">selectedFile </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+                <span class="s1">String folder </span><span class="s2">= </span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s4">&quot;imgs/&quot;</span><span class="s2">).</span><span class="s1">getPath</span><span class="s2">();</span>
+                <span class="s1">folder </span><span class="s2">= </span><span class="s1">folder</span><span class="s2">.</span><span class="s1">substring</span><span class="s2">(</span><span class="s5">1</span><span class="s2">);</span>
+                <span class="s0">try </span><span class="s2">{</span>
+                    <span class="s1">String fileName </span><span class="s2">= </span><span class="s0">new </span><span class="s1">SimpleDateFormat</span><span class="s2">(</span><span class="s4">&quot;yyyy-MM-dd hh-mm-ss&quot;</span><span class="s2">).</span><span class="s1">format</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Date</span><span class="s2">());</span>
+                    <span class="s1">fileName </span><span class="s2">= </span><span class="s1">fileName </span><span class="s2">+ </span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">().</span><span class="s1">substring</span><span class="s2">(</span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">getName</span><span class="s2">().</span><span class="s1">lastIndexOf</span><span class="s2">(</span><span class="s4">&quot;.&quot;</span><span class="s2">));</span>
+                    <span class="s1">Path destinationPath </span><span class="s2">= </span><span class="s1">Paths</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">folder</span><span class="s2">, </span><span class="s1">fileName</span><span class="s2">);</span>
+
+                    <span class="s3">// Copy the selected file to the destination path</span>
+                    <span class="s1">Files</span><span class="s2">.</span><span class="s1">copy</span><span class="s2">(</span><span class="s1">selectedFile</span><span class="s2">.</span><span class="s1">toPath</span><span class="s2">(), </span><span class="s1">destinationPath</span><span class="s2">, </span><span class="s1">StandardCopyOption</span><span class="s2">.</span><span class="s1">REPLACE_EXISTING</span><span class="s2">);</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;File saved to: &quot; </span><span class="s2">+ </span><span class="s1">destinationPath</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">());</span>
+                    <span class="s1">product</span><span class="s2">.</span><span class="s1">setImagePath</span><span class="s2">(</span><span class="s4">&quot;imgs/&quot; </span><span class="s2">+ </span><span class="s1">fileName</span><span class="s2">);</span>
+                    <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Image</span><span class="s2">( </span><span class="s1">destinationPath</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">()));</span>
+
+                <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">) {</span>
+                    <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">initParams</span><span class="s2">(</span><span class="s1">ProductsTabController productsTabController</span><span class="s2">, </span><span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">Category</span><span class="s2">&gt; </span><span class="s1">categories</span><span class="s2">){</span>
+        <span class="s1">product </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Product</span><span class="s2">();</span>
+        <span class="s1">nameInput</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">NameProperty</span><span class="s2">());</span>
+        <span class="s1">priceInput</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">PriceProperty</span><span class="s2">(), </span><span class="s1">NumberFormat</span><span class="s2">.</span><span class="s1">getNumberInstance</span><span class="s2">());</span>
+        <span class="s1">ingredientInput</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">IngredientProperty</span><span class="s2">());</span>
+        <span class="s3">//ingredientInput.textProperty().bindBidirectional(product.IngredientProperty(), NumberFormat.getNumberInstance());</span>
+
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">productsTabController </span><span class="s2">= </span><span class="s1">productsTabController</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">categories </span><span class="s2">= </span><span class="s1">categories</span><span class="s2">;</span>
+        <span class="s1">categoryComboBox</span><span class="s2">.</span><span class="s1">setItems</span><span class="s2">(</span><span class="s1">categories</span><span class="s2">);</span>
+        <span class="s1">categoryComboBox</span><span class="s2">.</span><span class="s1">valueProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">product</span><span class="s2">.</span><span class="s1">CategoryProperty</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

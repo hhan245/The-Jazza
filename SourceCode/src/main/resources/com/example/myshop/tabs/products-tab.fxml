@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" style="-fx-background-color: #F7F3EF;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myshop.controllers.ProductsTabController">
+    <children>
+      <HBox fx:id="line_shape1" layoutX="42.0" layoutY="112.0" prefHeight="580.0" prefWidth="919.0" stylesheets="@../css/product.css" />
+        <Label layoutX="39.0" layoutY="9.0" style="-fx-font-weight: bold;" text="Danh sách sản phẩm" textFill="#222f52">
+            <font>
+                <Font name="Alegreya Medium" size="25.0" />
+            </font>
+        </Label>
+        <Button fx:id="addBtn" layoutX="907.0" layoutY="61.0" mnemonicParsing="false" stylesheets="@../css/product.css" text="Thêm">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></Button>
+        <TableView fx:id="tableView" layoutX="63.0" layoutY="126.0" prefHeight="550.0" prefWidth="879.0" stylesheets="@../css/tableview.css">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="38.39999008178711" text="ID" />
+                <TableColumn fx:id="imageCol" prefWidth="117.60000610351562" text="Hình ảnh" />
+                <TableColumn fx:id="nameCol" prefWidth="237.6000518798828" text="Tên sản phẩm" />
+                <TableColumn fx:id="categoryCol" prefWidth="169.5999755859375" text="Loại sản phẩm" />
+                <TableColumn fx:id="priceCol" prefWidth="117.60003662109375" text="Đơn giá" />
+                <TableColumn fx:id="ingredientCol" prefWidth="115.20001220703125" text="Nguyên liệu" />
+                <TableColumn fx:id="actionCol" prefWidth="77.5999633789063" />
+            </columns>
+        </TableView>
+        <HBox alignment="CENTER" layoutX="469.0" layoutY="706.0" spacing="5.0">
+            <children>
+                <Button fx:id="prevBtn" mnemonicParsing="false" text="&lt;" />
+                <Label fx:id="currentPageLabel" />
+                <Label text="/" />
+                <Label fx:id="totalPageLabel" />
+                <Button fx:id="nextBtn" mnemonicParsing="false" text="&gt;" />
+            </children>
+        </HBox>
+      <TextField fx:id="searchField" layoutX="38.0" layoutY="61.0" prefHeight="26.0" prefWidth="306.0" promptText="Tìm kiếm Sản phẩm">
+         <font>
+            <Font name="BT Beau Sans Regular" size="12.0" />
+         </font></TextField>
+    </children>
+</AnchorPane>

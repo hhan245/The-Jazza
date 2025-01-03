@@ -1,0 +1,89 @@
+#line_shape1{
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: #222F52;
+    -fx-border-width: 1;
+}
+#addBtn{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 5;
+    -fx-text-fill: #F4F2EF;
+    -fx-font-family: "BT Beau Sans";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+#comboBoxOrder{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-font-family: "BT Beau Sans";
+
+    -fx-font-size: 12px;
+}
+
+
+#comboBoxOrder .list-cell {
+    -fx-text-fill: #F7F3EF;
+}
+
+#comboBoxOrder .list-view .list-cell {
+    -fx-text-fill: #222F52; /* Set the text color of the items in the list view */
+}
+#comboBoxOrder .list-view .list-cell:focused {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}
+
+/* combo-box hover text */
+#comboBoxOrder .list-view .list-cell:hover {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}
+
+#cancelBtn{
+    -fx-background-color: #AD8B4A;
+    -fx-background-radius: 8;
+    -fx-text-fill: #F4F2EF;
+    -fx-font-family: "BT Beau Sans";
+    -fx-font-weight: bold;
+}
+#okBtn{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-text-fill: #F4F2EF;
+    -fx-font-family: "BT Beau Sans";
+    -fx-font-weight: bold;
+}
+#importBtn{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-text-fill: #F4F2EF;
+    -fx-font-family: "BT Beau Sans";
+    -fx-font-weight: bold;
+}
+#statusComboBox{
+    -fx-background-color: #222F52;
+    -fx-background-radius: 8;
+    -fx-font-family: "BT Beau Sans";
+
+    -fx-font-size: 12px;
+}
+
+
+#statusComboBox .list-cell {
+    -fx-text-fill: #F7F3EF;
+}
+
+#statusComboBox .list-view .list-cell {
+    -fx-text-fill: #222F52; /* Set the text color of the items in the list view */
+}
+#statusComboBox .list-view .list-cell:focused {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}
+
+/* combo-box hover text */
+#statusComboBox .list-view .list-cell:hover {
+    -fx-background-color : #222F52;  /* Cadet Blue */
+    -fx-text-fill: #F7F3EF;
+}

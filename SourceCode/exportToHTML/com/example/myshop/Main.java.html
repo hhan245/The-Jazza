@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>Main.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">AESCryptoprocessor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">Storing</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">application</span><span class="s2">.</span><span class="s1">Application</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">Main </span><span class="s0">extends </span><span class="s1">Application </span><span class="s2">{</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">start</span><span class="s2">(</span><span class="s1">Stage stage</span><span class="s2">) </span><span class="s0">throws </span><span class="s1">IOException </span><span class="s2">{</span>
+        <span class="s1">String storedUsername </span><span class="s2">= </span><span class="s1">Storing</span><span class="s2">.</span><span class="s1">getValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;username&quot;</span><span class="s2">);</span>
+        <span class="s1">String storedPassword </span><span class="s2">= </span><span class="s1">Storing</span><span class="s2">.</span><span class="s1">getValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;password&quot;</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">storedUsername </span><span class="s2">+ </span><span class="s3">&quot;-&quot; </span><span class="s2">+ </span><span class="s1">storedPassword</span><span class="s2">);</span>
+
+        <span class="s1">AESCryptoprocessor aesCryptoprocessor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">AESCryptoprocessor</span><span class="s2">();</span>
+        <span class="s1">storedPassword </span><span class="s2">= </span><span class="s1">aesCryptoprocessor</span><span class="s2">.</span><span class="s1">decrypt</span><span class="s2">(</span><span class="s1">storedPassword</span><span class="s2">);</span>
+        <span class="s1">MySQLConnector connector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">storedUsername </span><span class="s2">+ </span><span class="s3">&quot;-&quot; </span><span class="s2">+ </span><span class="s1">storedPassword</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">connector</span><span class="s2">.</span><span class="s1">Connect</span><span class="s2">(</span><span class="s1">storedUsername</span><span class="s2">, </span><span class="s1">storedPassword</span><span class="s2">)){</span>
+            <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;windows/main-window.fxml&quot;</span><span class="s2">));</span>
+            <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s4">1200</span><span class="s2">, </span><span class="s4">750</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;MainWindow!&quot;</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;windows/login-window.fxml&quot;</span><span class="s2">));</span>
+            <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s4">1000</span><span class="s2">, </span><span class="s4">700</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;Login!&quot;</span><span class="s2">);</span>
+
+
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+            <span class="s1">stage</span><span class="s2">.</span><span class="s1">show</span><span class="s2">();</span>
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">launch</span><span class="s2">();</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

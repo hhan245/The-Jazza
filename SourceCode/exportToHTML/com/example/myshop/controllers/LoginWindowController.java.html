@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>LoginWindowController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LoginWindowController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">Main</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">AESCryptoprocessor</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">MySQLConnector</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">utils</span><span class="s2">.</span><span class="s1">Storing</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">Initializable</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Node</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">Scene</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">stage</span><span class="s2">.</span><span class="s1">Stage</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">net</span><span class="s2">.</span><span class="s1">URL</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ResourceBundle</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">LoginWindowController </span><span class="s0">implements </span><span class="s1">Initializable </span><span class="s2">{</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button loginBtn</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">TextField usernameInput</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">PasswordField passwordInput</span><span class="s2">;</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label errorText</span><span class="s2">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">initialize</span><span class="s2">(</span><span class="s1">URL location</span><span class="s2">, </span><span class="s1">ResourceBundle resources</span><span class="s2">) {</span>
+
+
+        <span class="s1">errorText</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">);</span>
+        <span class="s1">loginBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+
+            <span class="s1">String username </span><span class="s2">= </span><span class="s1">usernameInput</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">String password </span><span class="s2">= </span><span class="s1">passwordInput</span><span class="s2">.</span><span class="s1">getText</span><span class="s2">();</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">username </span><span class="s2">+ </span><span class="s3">&quot;-&quot; </span><span class="s2">+ </span><span class="s1">password</span><span class="s2">);</span>
+            <span class="s1">savePassword</span><span class="s2">(</span><span class="s1">username</span><span class="s2">, </span><span class="s1">password</span><span class="s2">);</span>
+            <span class="s1">MySQLConnector mySQLConnector </span><span class="s2">= </span><span class="s1">MySQLConnector</span><span class="s2">.</span><span class="s1">getInstance</span><span class="s2">();</span>
+            <span class="s4">//neu connect thanh cong</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">mySQLConnector</span><span class="s2">.</span><span class="s1">Connect</span><span class="s2">(</span><span class="s1">username</span><span class="s2">, </span><span class="s1">password</span><span class="s2">)){</span>
+                <span class="s4">//CHuyen sang man hinh chinh</span>
+                <span class="s0">try</span><span class="s2">{</span>
+                    <span class="s1">Stage stage </span><span class="s2">= (</span><span class="s1">Stage</span><span class="s2">) ((</span><span class="s1">Node</span><span class="s2">) </span><span class="s1">event</span><span class="s2">.</span><span class="s1">getSource</span><span class="s2">()).</span><span class="s1">getScene</span><span class="s2">().</span><span class="s1">getWindow</span><span class="s2">();</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setResizable</span><span class="s2">(</span><span class="s0">false</span><span class="s2">);</span>
+
+                    <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;windows/main-window.fxml&quot;</span><span class="s2">));</span>
+                    <span class="s1">Scene scene </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scene</span><span class="s2">(</span><span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">(), </span><span class="s5">1200</span><span class="s2">, </span><span class="s5">750</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setTitle</span><span class="s2">(</span><span class="s3">&quot;MainWindow&quot;</span><span class="s2">);</span>
+                    <span class="s1">stage</span><span class="s2">.</span><span class="s1">setScene</span><span class="s2">(</span><span class="s1">scene</span><span class="s2">);</span>
+                <span class="s2">}</span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception e</span><span class="s2">){</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">e</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+            <span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">errorText</span><span class="s2">.</span><span class="s1">setText</span><span class="s2">(</span><span class="s3">&quot;Sai tài khoản hoặc mật khẩu&quot;</span><span class="s2">);</span>
+            <span class="s2">}</span>
+
+
+
+
+        <span class="s2">});</span>
+    <span class="s2">}</span>
+    <span class="s0">void </span><span class="s1">savePassword</span><span class="s2">(</span><span class="s1">String username</span><span class="s2">,</span><span class="s1">String password</span><span class="s2">){</span>
+        <span class="s1">Storing</span><span class="s2">.</span><span class="s1">putValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;username&quot;</span><span class="s2">,</span><span class="s1">username</span><span class="s2">);</span>
+        <span class="s1">AESCryptoprocessor aesCryptoprocessor </span><span class="s2">= </span><span class="s0">new </span><span class="s1">AESCryptoprocessor</span><span class="s2">();</span>
+
+        <span class="s1">String encryptedPassword </span><span class="s2">= </span><span class="s1">aesCryptoprocessor</span><span class="s2">.</span><span class="s1">encrypt</span><span class="s2">(</span><span class="s1">password</span><span class="s2">);</span>
+        <span class="s1">Storing</span><span class="s2">.</span><span class="s1">putValueToPreferences</span><span class="s2">(</span><span class="s3">&quot;password&quot;</span><span class="s2">,</span><span class="s1">encryptedPassword</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<html>
+<head>
+<title>ListViewItemController.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ListViewItemController.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">controllers</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">Main</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">Order</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">example</span><span class="s2">.</span><span class="s1">myshop</span><span class="s2">.</span><span class="s1">models</span><span class="s2">.</span><span class="s1">OrderDetail</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">collections</span><span class="s2">.</span><span class="s1">ObservableList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXML</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">fxml</span><span class="s2">.</span><span class="s1">FXMLLoader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Button</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">Label</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">control</span><span class="s2">.</span><span class="s1">ListCell</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">Image</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">image</span><span class="s2">.</span><span class="s1">ImageView</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">javafx</span><span class="s2">.</span><span class="s1">scene</span><span class="s2">.</span><span class="s1">layout</span><span class="s2">.</span><span class="s1">HBox</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">text</span><span class="s2">.</span><span class="s1">NumberFormat</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">ListViewItemController </span><span class="s0">extends </span><span class="s1">ListCell</span><span class="s2">&lt;</span><span class="s1">OrderDetail</span><span class="s2">&gt; {</span>
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button decreaseBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">HBox hbox</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">ImageView imageView</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Button increaseBtn</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label name</span><span class="s2">;</span>
+
+    <span class="s1">@FXML</span>
+    <span class="s0">private </span><span class="s1">Label quantity</span><span class="s2">;</span>
+    <span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">OrderDetail</span><span class="s2">&gt; </span><span class="s1">list</span><span class="s2">;</span>
+    <span class="s1">Order order</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">ListViewItemController</span><span class="s2">(</span><span class="s1">ObservableList</span><span class="s2">&lt;</span><span class="s1">OrderDetail</span><span class="s2">&gt; </span><span class="s1">list</span><span class="s2">, </span><span class="s1">Order order</span><span class="s2">) {</span>
+
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">list </span><span class="s2">= </span><span class="s1">list</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">order </span><span class="s2">= </span><span class="s1">order</span><span class="s2">;</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s1">FXMLLoader fxmlLoader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FXMLLoader</span><span class="s2">(</span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s3">&quot;components/listview-item-component.fxml&quot;</span><span class="s2">));</span>
+            <span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">setController</span><span class="s2">(</span><span class="s0">this</span><span class="s2">);</span>
+            <span class="s1">fxmlLoader</span><span class="s2">.</span><span class="s1">load</span><span class="s2">();</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">Exception ex</span><span class="s2">) {</span>
+
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">OrderDetail item</span><span class="s2">, </span><span class="s0">boolean </span><span class="s1">empty</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">updateItem</span><span class="s2">(</span><span class="s1">item</span><span class="s2">, </span><span class="s1">empty</span><span class="s2">);</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">empty </span><span class="s2">|| </span><span class="s1">item </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s1">setGraphic</span><span class="s2">(</span><span class="s0">null</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s1">String filePath </span><span class="s2">= </span><span class="s1">item</span><span class="s2">.</span><span class="s1">getProduct</span><span class="s2">().</span><span class="s1">getImagePath</span><span class="s2">();</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;&quot;</span><span class="s2">)) {</span>
+                <span class="s1">filePath </span><span class="s2">= </span><span class="s3">&quot;imgs/default.png&quot;</span><span class="s2">;</span>
+            <span class="s2">}</span>
+            <span class="s1">String url </span><span class="s2">= </span><span class="s1">Main</span><span class="s2">.</span><span class="s0">class</span><span class="s2">.</span><span class="s1">getResource</span><span class="s2">(</span><span class="s1">filePath</span><span class="s2">).</span><span class="s1">toExternalForm</span><span class="s2">();</span>
+            <span class="s1">imageView</span><span class="s2">.</span><span class="s1">setImage</span><span class="s2">(</span><span class="s0">new </span><span class="s1">Image</span><span class="s2">(</span><span class="s1">url</span><span class="s2">));</span>
+
+            <span class="s1">name</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getProduct</span><span class="s2">().</span><span class="s1">NameProperty</span><span class="s2">());</span>
+            <span class="s1">quantity</span><span class="s2">.</span><span class="s1">textProperty</span><span class="s2">().</span><span class="s1">bindBidirectional</span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">QuantityProperty</span><span class="s2">(), </span><span class="s1">NumberFormat</span><span class="s2">.</span><span class="s1">getNumberInstance</span><span class="s2">());</span>
+
+            <span class="s1">increaseBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+                <span class="s1">item</span><span class="s2">.</span><span class="s1">increaseQuantity</span><span class="s2">();</span>
+                <span class="s1">order</span><span class="s2">.</span><span class="s1">UpdateOrderDetail</span><span class="s2">(</span><span class="s1">list</span><span class="s2">);</span>
+            <span class="s2">});</span>
+
+            <span class="s1">decreaseBtn</span><span class="s2">.</span><span class="s1">setOnAction</span><span class="s2">(</span><span class="s1">event -&gt; </span><span class="s2">{</span>
+                <span class="s1">item</span><span class="s2">.</span><span class="s1">decreaseQuantity</span><span class="s2">();</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getQuantity</span><span class="s2">() == </span><span class="s4">0</span><span class="s2">) {</span>
+                    <span class="s1">list</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">item</span><span class="s2">);</span>
+                <span class="s2">}</span>
+                <span class="s1">order</span><span class="s2">.</span><span class="s1">UpdateOrderDetail</span><span class="s2">(</span><span class="s1">list</span><span class="s2">);</span>
+            <span class="s2">});</span>
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">item</span><span class="s2">.</span><span class="s1">getQuantity</span><span class="s2">() == </span><span class="s4">0</span><span class="s2">) {</span>
+                <span class="s1">list</span><span class="s2">.</span><span class="s1">remove</span><span class="s2">(</span><span class="s1">item</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s5">//  item.getProduct().setQuantity(item.getProduct().getQuantity() + 1);</span>
+               <span class="s1">order</span><span class="s2">.</span><span class="s1">UpdateOrderDetail</span><span class="s2">(</span><span class="s1">list</span><span class="s2">);</span>
+            <span class="s5">//  });</span>
+
+            <span class="s5">//set graphic cho cell</span>
+            <span class="s1">setGraphic</span><span class="s2">(</span><span class="s1">hbox</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}}</span>
+</pre>
+</body>
+</html>
